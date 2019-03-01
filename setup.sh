@@ -205,39 +205,6 @@ EOF
 done
 
 cat >> docker-compose.yml <<EOF
-  explorer_backend:
-    image: $explorer_backend_image
-    ports:
-      - 8081:8081
-    environment:
-      - JAVA_OPTS=
-      - EXPLORER_PORT=8081
-      - NODE_ENDPOINT=http://${ips[1]}:8545
-      - MONGO_CLIENT_URI=mongodb://docker.for.mac.host.internal:27017
-      - MONGO_DB_NAME=consortium-explorer
-      - UI_IP=http://localhost:5000
-    networks:
-      - quorum_net
-    depends_on:
-      - explorer_mongodb
-  explorer_mongodb:
-    image: $explorer_mongo_image
-    ports:
-      - 27017:27017
-    entrypoint: mongod --smallfiles --logpath=/dev/null --bind_ip "0.0.0.0"
-    depends_on:
-      - node_1
-      - node_2
-      - node_3
-  explorer_ui:
-    image: $explorer_ui_image
-    ports:
-      - 5000:5000
-    environment:
-      - REACT_APP_EXPLORER=http://localhost:8081
-EOF
-
-cat >> docker-compose.yml <<EOF
 
 networks:
   quorum_net:
