@@ -3,12 +3,11 @@ Create quorum based consortium chain painless, deploy it to Docker-compose & Kub
 
 ## Dependencies
 * `docker`
-* `kubectl`
-* `minikube`
+* `quorum 2.0.2`
 
 ## Installation
 ~~~shell
-git clone https://github.com/ATNIO/quorum-deploy.git
+git clone https://github.com/CGems/quorum-deploy.git
 cd quorum-deploy
 docker build -t quorum -f quorum.Dockerfile .
 ~~~
@@ -24,35 +23,6 @@ Now you have a consortium chain and it's explorer running inside docker, you can
 ~~~shell
 geth --exec 'loadScript("examples/contract_pub.js") attach http://0.0.0.0:22001
 open http://localhost:5000
-~~~
-If the explorer doesn't sync block data correctly, you should restart it by
-~~~shell
-docker-compose restart explorer_backend
-~~~
-
-### Minikube
-Edit `ip.cfg`, enable the config for `minikube` and disable the other ones, then run
-~~~shell
-eval $(minikube docker-env)
-docker build -t quorum -f quorum.Dockerfile .
-docker tag quorum asia.gcr.io/consortiumchain/quorum
-docker build -t explorer-ui -f ui.Dockerfile .
-docker tag explorer-ui asia.gcr.io/consortiumchain/explorer-ui
-docker build -t explorer-backend -f backend.Dockerfile .
-docker tag explorer-backend asia.gcr.io/consortiumchain/explorer-backend
-./setup.sh
-minikube start
-kubectl config use-context minikube
-kubectl create -f consortium.yaml,explorer.yaml
-~~~
-Now you have a local consortium chain cluster and it's explorer running inside minikube, have a try by
-~~~shell
-geth --exec 'loadScript("examples/contract_pub.js")' attach http://$(minikube ip):31710
-open http://$(minikube ip):31710
-~~~
-If the explorer doesn't sync block data correctly, you should restart it by
-~~~shell
-cd scripts && ./recreate explorer
 ~~~
 
 ### Production
