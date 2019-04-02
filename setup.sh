@@ -98,7 +98,7 @@ do
   sep=`[[ $n < $nnodes ]] && echo ","`
   cat >> genesis.json <<EOF
     "${account}": {
-      "balance": "1000000000000000000000000000"
+      "balance": "2000000000000000000000000000"
     }${sep}
 EOF
 
@@ -107,7 +107,7 @@ done
 
 cat >> genesis.json <<EOF
   },
-  "coinbase": "0x0000000000000000000000000000000000000000",
+  "coinbase": "0x030461a2ebf229c2F8021c29EF7200969b35a694",
   "config": {
     "homesteadBlock": 0,
     "chainId": 1,
