@@ -18,9 +18,9 @@ RUN apt-get update && \
 
 RUN wget -q https://github.com/jpmorganchase/constellation/releases/download/v0.3.5-build.1/constellation-0.3.5-ubuntu1604.tar.gz && \
     tar xzvf constellation-0.3.5-ubuntu1604.tar.gz && \
-    cp constellation-0.3.5-ubuntu1604/constellation-node /usr/local/bin && \
+    cp constellation-node /usr/local/bin && \
     chmod 0755 /usr/local/bin/constellation-node && \
-    rm -rf constellation-0.3.5-ubuntu1604.tar.gz constellation-0.3.5-ubuntu1604
+    rm -rf constellation-0.3.5-ubuntu1604.tar.gz constellation-node
 
 ENV GOREL go1.10.linux-amd64.tar.gz
 ENV PATH $PATH:/usr/local/go/bin
