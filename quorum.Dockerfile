@@ -16,11 +16,11 @@ RUN apt-get update && \
             psmisc \
             zlib1g-dev
 
-RUN wget -q https://github.com/jpmorganchase/constellation/releases/download/v0.3.2/constellation-0.3.2-ubuntu1604.tar.xz && \
-    tar xf constellation-0.3.2-ubuntu1604.tar.xz && \
-    cp constellation-0.3.2-ubuntu1604/constellation-node /usr/local/bin && \
+RUN wget -q https://github.com/jpmorganchase/constellation/releases/download/v0.3.5-build.1/constellation-0.3.5-ubuntu1604.tar.gz && \
+    tar xzvf constellation-0.3.5-ubuntu1604.tar.gz && \
+    cp constellation-node /usr/local/bin && \
     chmod 0755 /usr/local/bin/constellation-node && \
-    rm -rf constellation-0.3.2-ubuntu1604.tar.xz constellation-0.3.2-ubuntu1604
+    rm -rf constellation-0.3.5-ubuntu1604.tar.gz constellation-node
 
 ENV GOREL go1.10.linux-amd64.tar.gz
 ENV PATH $PATH:/usr/local/go/bin
@@ -68,3 +68,4 @@ COPY --from=builder \
     /usr/local/bin/
 
 CMD ["/qdata/start.sh"]
+
